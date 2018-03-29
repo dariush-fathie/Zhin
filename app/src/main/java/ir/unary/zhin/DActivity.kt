@@ -5,6 +5,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import com.google.android.flexbox.FlexboxLayout
 import kotlinx.android.synthetic.main.activity_d.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
@@ -16,7 +17,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener {
         toggleBottomSheet()
     }
 
-    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<FlexboxLayout>
+    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private lateinit var mBottomSheetCallback: BottomSheetBehavior.BottomSheetCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
