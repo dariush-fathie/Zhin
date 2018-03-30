@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btn_dariush.setOnClickListener(this)
+        btn_behzad.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {

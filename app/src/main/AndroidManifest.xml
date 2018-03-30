@@ -21,7 +21,8 @@
             android:label="@string/title_activity_d"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize" />
-        <activity android:name=".BActivity"></activity>
+        <activity android:name=".BActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
