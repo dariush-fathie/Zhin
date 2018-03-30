@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             btn_dariush.id -> startActivity(Intent(this@MainActivity, DActivity::class.java))
+
+            btn_behzad.id -> startActivity(Intent(this@MainActivity, BActivity::class.java))
             else -> return
         }
     }
