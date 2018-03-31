@@ -7,5 +7,9 @@
     <color name="red">#ff5959</color>
     <color name="title">#313131</color>
     <color name="subTitle">#494949</color>
+    <color name="hint">#9b9b9b</color>
+    <color name="c0">#f7f7f7</color>
     <color name="c1">#edefed</color>
+    <color name="c2">#d7d7d7</color>
+    <color name="imageBackColor">#3aaada</color>
 </resources>
