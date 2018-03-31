@@ -13,11 +13,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btn_dariush.setOnClickListener(this)
+        btn_behzad.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
             btn_dariush.id -> startActivity(Intent(this@MainActivity, DActivity::class.java))
+
+            btn_behzad.id -> startActivity(Intent(this@MainActivity, BActivity::class.java))
             else -> return
         }
     }

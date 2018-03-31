@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp">
+
+        <TextView
+            android:id="@+id/title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/limit_tv"
+            android:layout_toRightOf="@+id/limit_tv"
+            android:gravity="center"
+            android:text="ورود"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/limit_tv"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="/"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+
+            android:id="@+id/title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/title1"
+            android:layout_toLeftOf="@+id/limit_tv"
+            android:layout_toStartOf="@+id/limit_tv"
+            android:gravity="center"
+            android:text="ثبت نام"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/username_rl"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="160dp"
+        android:paddingLeft="30dp"
+
+        >
+
+        <android.support.v7.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/act_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/username_iv"
+            android:hint="نام کاربری"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textColorHint="#ebe9e9"
+            app:theme="@style/EditText" />
+
+        <ImageView
+            android:id="@+id/username_iv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/username"
+            android:padding="2dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/password_rl"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/username_rl"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="30dp">
+
+        <android.support.v7.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/act_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/password_iv"
+            android:hint="رمز عبور"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textColorHint="#ebe9e9"
+            app:theme="@style/EditText" />
+
+        <ImageView
+            android:id="@+id/password_iv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/lock"
+            android:padding="2dp" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/login_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/password_rl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/login_tag"
+        android:gravity="center"
+        android:text="ورود"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/forget_tv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/login_tv"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="بازیابی رمز عبور"
+        android:textColor="#fff"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/not_acount_tv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="64dp"
+        android:gravity="center"
+        android:text="هنوز ثبت نام نکرده اید؟"
+        android:textColor="#fff"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/register_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/login_tag"
+        android:gravity="center"
+        android:text="ثبت نام"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+
+</RelativeLayout>
+
+
