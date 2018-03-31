@@ -3,10 +3,13 @@ package ir.unary.zhin
 import `in`.galaxyofandroid.spinerdialog.OnSpinerItemClick
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -66,6 +69,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
     }
 
     private fun sort() {
+        iv_sort.setImageResource(R.drawable.ic_sort_selected)
         val mBuilder = AlertDialog.Builder(this@DActivity)
         val charSequences = arrayOfNulls<CharSequence>(4)
         charSequences[0] = "بر اساس بازدید"
@@ -86,10 +90,10 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         val mPopupMenu = PopupMenu(this, iv_moreToolbar)
         mPopupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
             when (it.itemId) {
-                R.id.menu_sort -> Toast.makeText(applicationContext , "مرتب سازی" , Toast.LENGTH_SHORT).show()
-                R.id.menu_filter -> Toast.makeText(applicationContext , "دسته بندی" , Toast.LENGTH_SHORT).show()
-                R.id.menu_ostan -> Toast.makeText(applicationContext , "استان" , Toast.LENGTH_SHORT).show()
-                R.id.menu_city -> Toast.makeText(applicationContext , "شهر" , Toast.LENGTH_SHORT).show()
+                R.id.menu_sort -> Toast.makeText(applicationContext, "مرتب سازی", Toast.LENGTH_SHORT).show()
+                R.id.menu_filter -> Toast.makeText(applicationContext, "دسته بندی", Toast.LENGTH_SHORT).show()
+                R.id.menu_ostan -> Toast.makeText(applicationContext, "استان", Toast.LENGTH_SHORT).show()
+                R.id.menu_city -> Toast.makeText(applicationContext, "شهر", Toast.LENGTH_SHORT).show()
             }
             false
         })
@@ -190,19 +194,27 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
 
     }
 
-
     private fun changeLayoutManager(type: Int) {
         val a: RecyclerView.LayoutManager
         when (type) {
             0 -> {
+                iv_bigLayoutManager.setImageResource(R.drawable.ic_big_selected)
+                iv_mediumLayoutManager.setImageResource(R.drawable.ic_medium)
+                iv_smallLayoutManager.setImageResource(R.drawable.ic_small)
                 a = LinearLayoutManager(this@DActivity)
                 mMainAdapter = MainAdapter(this@DActivity, 0)
             }
             1 -> {
+                iv_bigLayoutManager.setImageResource(R.drawable.ic_big)
+                iv_mediumLayoutManager.setImageResource(R.drawable.ic_medium_selected)
+                iv_smallLayoutManager.setImageResource(R.drawable.ic_small)
                 a = LinearLayoutManager(this@DActivity)
                 mMainAdapter = MainAdapter(this@DActivity, 1)
             }
             else -> {
+                iv_bigLayoutManager.setImageResource(R.drawable.ic_big)
+                iv_mediumLayoutManager.setImageResource(R.drawable.ic_medium)
+                iv_smallLayoutManager.setImageResource(R.drawable.ic_small_selected)
                 a = GridLayoutManager(this@DActivity, 2)
                 mMainAdapter = MainAdapter(this@DActivity, 2)
             }
@@ -252,10 +264,24 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         et_search.text.clear()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                drawer_layout.openDrawer(GravityCompat.END)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_d)
         setSupportActionBar(toolbar)
+        val actionbar = supportActionBar
+        actionbar!!.setDisplayHomeAsUpEnabled(true)
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white)
+
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_layout)
         mBottomSheetBehavior.setBottomSheetCallback(setCallback())
         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -269,7 +295,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         val decor = PaddingItemDecoration(20, 30)
         rv_main.addItemDecoration(decor)
 
-        mMainAdapter = MainAdapter(this, 0)
+        mMainAdapter = MainAdapter(this, 1)
         rv_main.adapter = mMainAdapter
 
         rv_bottomList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -294,6 +320,21 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
             }
             false
         })
+
+
+        nav_view.setNavigationItemSelectedListener(
+                NavigationView.OnNavigationItemSelectedListener { menuItem ->
+                    // set item as selected to persist highlight
+                    menuItem.isChecked = true
+                    // close drawer when item is tapped
+                    drawer_layout.closeDrawers()
+                    // Add code here to update the UI based on the item selected
+                    // For example, swap UI fragments here
+                    if (menuItem.itemId == R.id.nav_login) {
+                        startActivity(Intent(this@DActivity, BActivity::class.java))
+                    }
+                    true
+                })
 
     }
 

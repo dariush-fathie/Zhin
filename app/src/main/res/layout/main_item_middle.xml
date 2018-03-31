@@ -53,17 +53,17 @@
                 android:background="@color/c1" />
 
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_margin="5dp"
                     android:id="@+id/iv_more"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_margin="5dp"
                     android:src="@drawable/ic_more" />
 
                 <ImageView
@@ -77,13 +77,27 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:src="@drawable/ic_image"
-            android:id="@+id/iv_adsImage"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:background="@color/imageBackColor" />
+            android:layout_weight="3">
+
+            <ImageView
+                android:id="@+id/iv_adsImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/imageBackColor"
+                android:src="@drawable/ic_image" />
+
+            <com.github.rahatarmanahmed.cpv.CircularProgressView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                app:cpv_animAutostart="true"
+                app:cpv_indeterminate="true" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
