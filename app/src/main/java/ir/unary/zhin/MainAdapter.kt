@@ -1,6 +1,7 @@
 package ir.unary.zhin
 
 import android.content.Context
+import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -37,7 +38,7 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 100
     }
 
 
@@ -52,10 +53,14 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
 
         init {
             itemView.setOnClickListener(this)
+            ivLike.setOnClickListener(this)
         }
 
         override fun onClick(view: View) {
             Toast.makeText(mContext, "#$adapterPosition clicked", Toast.LENGTH_SHORT).show()
+            when (view.id) {
+                ivLike.id -> ivLike.setImageResource(R.drawable.ic_liked)
+            }
         }
     }
 
@@ -68,11 +73,30 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
 
         init {
             itemView.setOnClickListener(this)
+            ivMore.setOnClickListener(this)
+            ivLike.setOnClickListener(this)
         }
 
         override fun onClick(view: View) {
-            Toast.makeText(mContext, "#$adapterPosition clicked", Toast.LENGTH_SHORT).show()
+            when (view.id) {
+                ivMore.id -> showPopUpMenu()
+                ivLike.id -> ivLike.setImageResource(R.drawable.ic_liked)
+            }
         }
+
+        private fun showPopUpMenu() {
+            val mPopupMenu = PopupMenu(mContext, ivMore)
+            mPopupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_comment -> Toast.makeText(mContext, "comment", Toast.LENGTH_SHORT).show()
+                    R.id.menu_location -> Toast.makeText(mContext, "location", Toast.LENGTH_SHORT).show()
+                }
+                false
+            })
+            mPopupMenu.inflate(R.menu.popup_menu_1)
+            mPopupMenu.show()
+        }
+
     }
 
     internal inner class SmallItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -82,10 +106,29 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
 
         init {
             itemView.setOnClickListener(this)
+            ivMore.setOnClickListener(this)
         }
 
         override fun onClick(view: View) {
-            Toast.makeText(mContext, "#$adapterPosition clicked", Toast.LENGTH_SHORT).show()
+            when (view.id) {
+                ivMore.id -> showPopUpMenu()
+            }
+        }
+
+        private fun showPopUpMenu() {
+            val mPopupMenu = PopupMenu(mContext, ivMore)
+            mPopupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_comment -> Toast.makeText(mContext, "comment", Toast.LENGTH_SHORT).show()
+                    R.id.menu_like -> {
+                        Toast.makeText(mContext, "like", Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.menu_location -> Toast.makeText(mContext, "location", Toast.LENGTH_SHORT).show()
+                }
+                false
+            })
+            mPopupMenu.inflate(R.menu.popup_menu_2)
+            mPopupMenu.show()
         }
     }
 

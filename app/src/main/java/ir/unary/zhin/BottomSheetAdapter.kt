@@ -21,7 +21,7 @@ class BottomSheetAdapter(internal var mContext: Context, internal var tabPositio
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 100
     }
 
 

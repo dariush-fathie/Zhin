@@ -20,11 +20,11 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/c1"
+        android:background="@color/c0"
         app:menu="@menu/bottom_nav_bar" />
 
     <android.support.v7.widget.RecyclerView
-        android:background="#f5f5f5"
+        android:background="@color/c1"
         android:id="@+id/rv_bottomList"
         android:layout_width="match_parent"
         android:layout_height="200dp"

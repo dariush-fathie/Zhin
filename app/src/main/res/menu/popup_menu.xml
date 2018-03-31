@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_sort"
+        android:icon="@drawable/ic_sort"
+        android:title="مرتب سازی" />
+    <item
+        android:id="@+id/menu_filter"
+        android:icon="@drawable/ic_filter_dark"
+        android:title="دسته بندی" />
+    <item
+        android:id="@+id/menu_ostan"
+        android:icon="@drawable/ic_location1"
+        android:title="استان" />
+    <item
+        android:id="@+id/menu_city"
+        android:icon="@drawable/ic_location1"
+        android:title="شهر" />
+</menu>

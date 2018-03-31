@@ -34,4 +34,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.0'
     implementation 'com.android.support:cardview-v7:27.1.0'
     implementation 'com.github.MdFarhanRaja:SearchableSpinner:1.9'
+    implementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
 }

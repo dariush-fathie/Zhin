@@ -3,10 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/c1"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
     <android.support.v7.widget.RecyclerView
+        android:background="#00ffffff"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/rv_main"
         android:layout_width="match_parent"

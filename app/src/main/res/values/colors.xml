@@ -5,11 +5,15 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="red">#ff5959</color>
+    <color name="orange">#f75b38</color>
     <color name="title">#313131</color>
     <color name="subTitle">#494949</color>
     <color name="hint">#9b9b9b</color>
     <color name="c0">#f7f7f7</color>
     <color name="c1">#edefed</color>
     <color name="c2">#d7d7d7</color>
-    <color name="imageBackColor">#3aaada</color>
+    <color name="c3">#c4c5c7</color>
+    <color name="c4">#bcbdbf</color>
+    <color name="imageBackColor">#80cbc4</color>
+    <color name="green0">#e0f2f1</color>
 </resources>
