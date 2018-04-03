@@ -2,8 +2,13 @@ package ir.unary.zhin
 
 import `in`.galaxyofandroid.spinerdialog.OnSpinerItemClick
 import `in`.galaxyofandroid.spinerdialog.SpinnerDialog
+import android.animation.Animator
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.BottomNavigationView
@@ -50,16 +55,46 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         Log.e("offset", "$verticalOffset")
         if (Math.abs(verticalOffset) == appBarLayout?.totalScrollRange) {
             // fully collapsed
+            changeColorAnimation(true)
         } else if (verticalOffset == 0) {
             // expanded
-            //ll_toolContainer.setBackgroundColor(ContextCompat.getColor(this@DActivity, R.color.c1))
+            /*int color = Color.TRANSPARENT;
+            Drawable background = view.getBackground();
+            if (background instanceof ColorDrawable)
+                color = ((ColorDrawable) background).getColor();*/
+            var c = Color.TRANSPARENT
+            val d = ll_toolContainer.background
+            if (d is ColorDrawable) {
+                c = d.color
+            }
+            if (c != ContextCompat.getColor(this, R.color.c1)) {
+                changeColorAnimation(false)
+            }
         } else {
-            //ll_toolContainer.setBackgroundColor(ContextCompat.getColor(this@DActivity, R.color.colorPrimary))
         }
     }
 
+    private var flagAnimationEnd: Boolean = true
 
-    fun changeColorAnimation(toGreen:Boolean){
+    private fun changeColorAnimation(toGreen: Boolean) {
+        flagAnimationEnd = false
+        val colorFrom: Int
+        val colorTo: Int
+        if (toGreen) {
+            colorFrom = ContextCompat.getColor(this, R.color.c1)
+            colorTo = ContextCompat.getColor(this, R.color.colorPrimary)
+        } else {
+            colorTo = ContextCompat.getColor(this, R.color.c1)
+            colorFrom = ContextCompat.getColor(this, R.color.colorPrimary)
+        }
+
+        val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo)
+        colorAnimation.duration = 400
+        colorAnimation.addUpdateListener({ valueAnimator: ValueAnimator? ->
+            ll_toolContainer.setBackgroundColor(valueAnimator?.animatedValue as Int)
+        })
+
+        colorAnimation.start()
 
     }
 
