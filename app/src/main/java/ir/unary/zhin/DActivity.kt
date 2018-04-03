@@ -9,12 +9,12 @@ import android.support.design.widget.AppBarLayout
 import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.NavigationView
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.MenuItem
@@ -30,32 +30,46 @@ import kotlinx.android.synthetic.main.content_layout.*
 
 
 class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener
-        , BottomNavigationView.OnNavigationItemReselectedListener, AppBarLayout.OnOffsetChangedListener {
+        , BottomNavigationView.OnNavigationItemReselectedListener, AppBarLayout.OnOffsetChangedListener, View.OnFocusChangeListener {
+
+
+    override fun onFocusChange(p0: View?, p1: Boolean) {
+        if (p1) {
+            iv_menu.setImageResource(R.drawable.ic_right_arrow)
+            iv_search.setImageResource(R.drawable.ic_delete_black)
+            et_search.hint = "جستجو در ژین"
+        } else {
+            iv_menu.setImageResource(R.drawable.ic_menu_dark)
+            iv_search.setImageResource(R.drawable.ic_search_black_36dp)
+            et_search.hint = "ژین"
+        }
+    }
 
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         Log.e("offset", "$verticalOffset")
         if (Math.abs(verticalOffset) == appBarLayout?.totalScrollRange) {
             // fully collapsed
-            iv_moreToolbar.visibility = View.VISIBLE
-        }/* else if (verticalOffset == 0) {
-            // fully expanded
-        }*/ else {
-            // not closed nor expanded
-            iv_moreToolbar.visibility = View.GONE
+        } else if (verticalOffset == 0) {
+            // expanded
+            //ll_toolContainer.setBackgroundColor(ContextCompat.getColor(this@DActivity, R.color.c1))
+        } else {
+            //ll_toolContainer.setBackgroundColor(ContextCompat.getColor(this@DActivity, R.color.colorPrimary))
         }
     }
 
 
+    fun changeColorAnimation(toGreen:Boolean){
+
+    }
+
     override fun onClick(p: View?) {
         when (p?.id) {
             R.id.iv_search -> {
-                enableSearchLayout()
-                search()
+                onSearchClick()
             }
-            R.id.iv_deleteSearch -> {
-                disableSearchLayout()
-                clearSearch()
+            R.id.iv_menu -> {
+                onMenuClick()
             }
             R.id.iv_bigLayoutManager -> changeLayoutManager(0)
             R.id.iv_mediumLayoutManager -> changeLayoutManager(1)
@@ -63,9 +77,21 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
             R.id.tv_filter -> openFilterDialog()
             R.id.tv_ostan -> openOstanDialog()
             R.id.tv_city -> openCityDialog()
-            R.id.iv_moreToolbar -> openPopUpMenu()
             R.id.iv_sort -> sort()
         }
+    }
+
+    private fun onMenuClick() {
+        if (et_search.hasFocus()) {
+            et_search.clearFocus()
+            hideKeyboard()
+        } else {
+            openDrawerLayout()
+        }
+    }
+
+    private fun openDrawerLayout() {
+        drawer_layout.openDrawer(GravityCompat.END)
     }
 
     private fun sort() {
@@ -84,23 +110,6 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         mBuilder.setCustomTitle(t)
         mBuilder.show()
     }
-
-
-    private fun openPopUpMenu() {
-        val mPopupMenu = PopupMenu(this, iv_moreToolbar)
-        mPopupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_sort -> Toast.makeText(applicationContext, "مرتب سازی", Toast.LENGTH_SHORT).show()
-                R.id.menu_filter -> Toast.makeText(applicationContext, "دسته بندی", Toast.LENGTH_SHORT).show()
-                R.id.menu_ostan -> Toast.makeText(applicationContext, "استان", Toast.LENGTH_SHORT).show()
-                R.id.menu_city -> Toast.makeText(applicationContext, "شهر", Toast.LENGTH_SHORT).show()
-            }
-            false
-        })
-        mPopupMenu.inflate(R.menu.popup_menu)
-        mPopupMenu.show()
-    }
-
 
     private val items = ArrayList<String>()
     lateinit var spinnerDialog: SpinnerDialog;
@@ -229,35 +238,37 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
     private lateinit var mMainAdapter: MainAdapter
 
 
-    private fun enableSearchLayout() {
-        if (et_search.visibility != View.VISIBLE) {
-            tv_toolbar_title.visibility = View.GONE
-            iv_moreToolbar.visibility = View.GONE
-            et_search.visibility = View.VISIBLE
-            iv_deleteSearch.visibility = View.VISIBLE
-            iv_search.setImageResource(R.drawable.ic_search_black_36dp)
+    private fun onSearchClick() {
+        if (et_search.hasFocus()) {
+            et_search.text.clear()
+        } else {
+            et_search.requestFocus()
+            openKeyboard()
         }
+
     }
 
-    private fun disableSearchLayout() {
-        iv_moreToolbar.visibility = View.VISIBLE
-        tv_toolbar_title.visibility = View.VISIBLE
-        et_search.visibility = View.GONE
-        iv_deleteSearch.visibility = View.GONE
-        iv_search.setImageResource(R.drawable.ic_search_white)
-    }
-
-    fun search() {
+    private fun onSearchActionClick() {
         if (et_search.text.toString() != "") {
+            et_search.clearFocus()
             hideKeyboard()
+            // todo searching
         }
     }
 
+    private fun openKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(et_search, InputMethodManager.SHOW_FORCED)
+    }
 
     private fun hideKeyboard() {
-        val i: InputMethodManager = application.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        i.hideSoftInputFromInputMethod(et_search.windowToken, 0)
-        et_search.clearFocus()
+        try {
+            val i: InputMethodManager = application.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            i.hideSoftInputFromInputMethod(et_search.windowToken, 0)
+            i.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        } catch (e: Exception) {
+            Log.e("InputMethod", e.message)
+        }
     }
 
     private fun clearSearch() {
@@ -277,11 +288,6 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_d)
-        setSupportActionBar(toolbar)
-        val actionbar = supportActionBar
-        actionbar!!.setDisplayHomeAsUpEnabled(true)
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_white)
-
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_layout)
         mBottomSheetBehavior.setBottomSheetCallback(setCallback())
         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -302,7 +308,6 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         rv_bottomList.addItemDecoration(decor)
 
         iv_search.setOnClickListener(this)
-        iv_deleteSearch.setOnClickListener(this)
         iv_bigLayoutManager.setOnClickListener(this)
         iv_mediumLayoutManager.setOnClickListener(this)
         iv_smallLayoutManager.setOnClickListener(this)
@@ -310,17 +315,18 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         iv_sort.setOnClickListener(this)
         tv_ostan.setOnClickListener(this)
         tv_city.setOnClickListener(this)
-        iv_moreToolbar.setOnClickListener(this)
+        iv_menu.setOnClickListener(this)
 
         et_search.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                search()
+                onSearchActionClick()
                 Log.e("seatch", "sdfs")
                 return@OnEditorActionListener true
             }
             false
         })
 
+        et_search.onFocusChangeListener = this
 
         nav_view.setNavigationItemSelectedListener(
                 NavigationView.OnNavigationItemSelectedListener { menuItem ->

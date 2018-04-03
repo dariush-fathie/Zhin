@@ -22,7 +22,8 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity android:name=".BActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".TestActivity"/>
     </application>
 
 </manifest>

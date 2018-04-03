@@ -89,14 +89,6 @@
                 android:background="@color/imageBackColor"
                 android:src="@drawable/ic_image" />
 
-            <com.github.rahatarmanahmed.cpv.CircularProgressView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"
-                app:cpv_animAutostart="true"
-                app:cpv_indeterminate="true" />
-
         </RelativeLayout>
 
     </LinearLayout>

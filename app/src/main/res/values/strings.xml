@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Zhin</string>
     <string name="title_activity_d">DActivity</string>
+    <string name="search_hint">جستجو</string>
 </resources>
