@@ -18,9 +18,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.*
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -342,6 +340,11 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         rv_bottomList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv_bottomList.addItemDecoration(decor)
 
+        /*rv_slider.layoutManager = LinearLayoutManager(this , LinearLayout.HORIZONTAL , false )
+        rv_slider.adapter = SliderAdapter(this , 4)
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(rv_slider)
+        snapHelper.onFling(20 ,0)*/
         iv_search.setOnClickListener(this)
         iv_bigLayoutManager.setOnClickListener(this)
         iv_mediumLayoutManager.setOnClickListener(this)
@@ -399,6 +402,11 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
                 rv_bottomList.adapter = mBottomSheetAdapter
                 return true
             }
+            R.id.menu_fav -> {
+                mBottomSheetAdapter = BottomSheetAdapter(this@DActivity, 3)
+                rv_bottomList.adapter = mBottomSheetAdapter
+                return true
+            }
         }
         return false
     }
@@ -423,6 +431,11 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
 
             R.id.menu_new -> {
                 mBottomSheetAdapter = BottomSheetAdapter(this@DActivity, 2)
+                rv_bottomList.adapter = mBottomSheetAdapter
+            }
+
+            R.id.menu_fav -> {
+                mBottomSheetAdapter = BottomSheetAdapter(this@DActivity, 3)
                 rv_bottomList.adapter = mBottomSheetAdapter
             }
         }

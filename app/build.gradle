@@ -36,4 +36,5 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.0'
     implementation 'com.github.MdFarhanRaja:SearchableSpinner:1.9'
     implementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+    implementation "cz.intik:overflow-pager-indicator:1.2.1"
 }
