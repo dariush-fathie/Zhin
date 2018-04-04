@@ -16,12 +16,6 @@
             android:text="نزدیک ترین #1"
             android:textColor="#fff"
             android:textSize="18sp" />
-        <com.github.rahatarmanahmed.cpv.CircularProgressView
-            android:layout_margin="10dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:cpv_animAutostart="true"
-            app:cpv_indeterminate="true" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

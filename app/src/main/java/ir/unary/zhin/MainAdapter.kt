@@ -18,12 +18,14 @@ import cz.intik.overflowindicator.OverflowPagerIndicator
 import cz.intik.overflowindicator.SimpleSnapHelper
 import android.R.attr.delay
 import android.util.Log
+import com.bumptech.glide.Glide
 
 
 class MainAdapter(internal var mContext: Context, internal var layoutType: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
         val view: View
         if (viewType == 0) {
             view = LayoutInflater.from(mContext).inflate(R.layout.slider, parent, false)
@@ -56,7 +58,7 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
     }
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
-        if (holder.adapterPosition == 0){
+        if (holder.adapterPosition == 0) {
             stopTime()
         }
     }
@@ -75,25 +77,25 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
         }
     }
 
-    lateinit var timer:Handler
+    lateinit var timer: Handler
 
-    private fun startTimer(slider:RecyclerView){
+    private fun startTimer(slider: RecyclerView) {
         var i = (slider.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
         if (!this::timer.isInitialized) {
             timer = Handler()
-            timer.postDelayed(object :Runnable {
+            timer.postDelayed(object : Runnable {
                 override fun run() {
-                    Log.e("SDDSF","SDFDS$i")
+                    Log.e("SDDSF", "SDFDS$i")
                     slider.smoothScrollToPosition(++i)
                 }
-            } , 2500)
+            }, 2500)
         }
     }
 
-    private fun stopTime(){
+    private fun stopTime() {
         try {
             timer.removeCallbacksAndMessages(null)
-        } catch (e:Exception){
+        } catch (e: Exception) {
 
         }
     }
@@ -112,9 +114,13 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
         var tvSubTitle1: TextView = itemView.findViewById(R.id.tv_subTitle1)
         var tvSubTitle2: TextView = itemView.findViewById(R.id.tv_subTitle2)
 
+
         init {
             itemView.setOnClickListener(this)
             ivLike.setOnClickListener(this)
+
+            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd);
+
         }
 
         override fun onClick(view: View) {
@@ -136,6 +142,8 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
             itemView.setOnClickListener(this)
             ivMore.setOnClickListener(this)
             ivLike.setOnClickListener(this)
+
+            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd);
         }
 
         override fun onClick(view: View) {
@@ -168,6 +176,7 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
         init {
             itemView.setOnClickListener(this)
             ivMore.setOnClickListener(this)
+            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd);
         }
 
         override fun onClick(view: View) {

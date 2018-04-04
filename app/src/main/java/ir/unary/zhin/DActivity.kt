@@ -75,6 +75,8 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
     private var flagAnimationEnd: Boolean = true
 
     private fun changeColorAnimation(toGreen: Boolean) {
+
+
         flagAnimationEnd = false
         val colorFrom: Int
         val colorTo: Int
@@ -170,7 +172,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
 
     private fun openOstanDialog() {
         items.clear()
-        items.add("آذربایجان غربی")
+        items.add("آذربایجان شرقی")
         items.add("آذربایجان غربی")
         items.add("اردبیل")
         items.add("اصفهان")
@@ -214,7 +216,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         mBuilder.setPositiveButton("فیلترکردن") { _, i ->
             filter1()
         }
-        mBuilder.setNegativeButton("ریست") { _, i ->
+        mBuilder.setNegativeButton("بازنشانی") { _, i ->
             reset()
         }
         mBuilder.setNeutralButton("بستن") { dialogInterface, i ->

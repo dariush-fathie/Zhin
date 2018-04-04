@@ -35,6 +35,7 @@ class BottomSheetAdapter(internal var mContext: Context, internal var tabPositio
                 0 -> pre = "نزدیک ترین "
                 1 -> pre = "پربازدید "
                 2 -> pre = "جدیدترین "
+                3 -> pre = "علاقمندی"
             }
             tv.text = "$pre#$adapterPosition"
             itemView.setOnClickListener(this)
