@@ -113,7 +113,12 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
             R.id.tv_ostan -> openOstanDialog()
             R.id.tv_city -> openCityDialog()
             R.id.iv_sort -> sort()
+            R.id.fab_up -> scrollToTop()
         }
+    }
+
+    private fun scrollToTop(){
+        rv_main.smoothScrollToPosition(0)
     }
 
     private fun onMenuClick() {
@@ -331,13 +336,26 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
 
         appBarLayout.addOnOffsetChangedListener(this)
 
-        rv_main.layoutManager = LinearLayoutManager(this)
+        val ll = LinearLayoutManager(this)
+        rv_main.layoutManager = ll
 
         val decor = PaddingItemDecoration(20, 30)
         rv_main.addItemDecoration(decor)
 
         mMainAdapter = MainAdapter(this, 1)
         rv_main.adapter = mMainAdapter
+
+        rv_main.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (ll.findLastVisibleItemPosition() > 5) {
+                    fab_up.visibility = View.VISIBLE
+                } else {
+                    fab_up.visibility = View.GONE
+                }
+            }
+        })
 
         rv_bottomList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv_bottomList.addItemDecoration(decor)
@@ -356,6 +374,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         tv_ostan.setOnClickListener(this)
         tv_city.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
+        fab_up.setOnClickListener(this)
 
         et_search.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

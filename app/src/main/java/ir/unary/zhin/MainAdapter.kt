@@ -17,6 +17,7 @@ import android.widget.Toast
 import cz.intik.overflowindicator.OverflowPagerIndicator
 import cz.intik.overflowindicator.SimpleSnapHelper
 import android.R.attr.delay
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import com.bumptech.glide.Glide
 
@@ -64,7 +65,9 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is SliderHolder) {
+        if (holder !is SliderHolder) {
+
+        } else {
             holder.rvSlider.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
             holder.rvSlider.adapter = SliderAdapter(mContext, 4)
             holder.overflowPagerIndicator.attachToRecyclerView(holder.rvSlider)
@@ -72,8 +75,6 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
                 SimpleSnapHelper(holder.overflowPagerIndicator).attachToRecyclerView(holder.rvSlider)
             }
             startTimer(holder.rvSlider)
-        } else {
-
         }
     }
 
@@ -118,9 +119,7 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
         init {
             itemView.setOnClickListener(this)
             ivLike.setOnClickListener(this)
-
-            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd);
-
+            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd)
         }
 
         override fun onClick(view: View) {
@@ -143,7 +142,7 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
             ivMore.setOnClickListener(this)
             ivLike.setOnClickListener(this)
 
-            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd);
+            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd)
         }
 
         override fun onClick(view: View) {
@@ -176,7 +175,7 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
         init {
             itemView.setOnClickListener(this)
             ivMore.setOnClickListener(this)
-            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd);
+            Glide.with(mContext).load(R.raw.iv_glide).into(ivAd)
         }
 
         override fun onClick(view: View) {
