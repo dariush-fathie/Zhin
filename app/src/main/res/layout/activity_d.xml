@@ -164,7 +164,7 @@
                                     android:layout_height="36dp"
                                     android:background="@drawable/selctor1"
                                     android:padding="6dp"
-                                    android:src="@drawable/ic_big" />
+                                    android:src="@drawable/ic_big_selected" />
 
                                 <ImageView
                                     android:id="@+id/iv_mediumLayoutManager"
@@ -172,7 +172,7 @@
                                     android:layout_height="36dp"
                                     android:background="@drawable/selctor1"
                                     android:padding="6dp"
-                                    android:src="@drawable/ic_medium_selected" />
+                                    android:src="@drawable/ic_medium" />
 
                                 <ImageView
                                     android:id="@+id/iv_smallLayoutManager"

@@ -27,10 +27,16 @@ public class FilterNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void fillBuffer() {
 
         buffer.add("مطب");
-        buffer.add("آزمایشگاه");
+        buffer.add("آزمایشگاه ها");
         buffer.add("سونوگرافی");
-        buffer.add("بیمارستان");
+        buffer.add("بیمارستان ها");
         buffer.add("کمپ ترک اعتیاد");
+        buffer.add("گفتار درمانی");
+        buffer.add("سی تی اسکن");
+        buffer.add("ام آر آی");
+        buffer.add("رادیولوژی");
+        buffer.add("بینایی سنجی");
+        buffer.add("انجمن های حمایتی");
         buffer.add("سایر");
 
         for (int i = 0; i < buffer.size(); i++) {

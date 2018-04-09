@@ -366,7 +366,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         val decor = PaddingItemDecoration(20, 30)
         rv_main.addItemDecoration(decor)
 
-        mMainAdapter = MainAdapter(this, 1)
+        mMainAdapter = MainAdapter(this, 0)
         rv_main.adapter = mMainAdapter
 
         rv_main.addOnScrollListener(object : RecyclerView.OnScrollListener() {
