@@ -171,6 +171,9 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
         var ivAd: ImageView = itemView.findViewById(R.id.iv_adsImage)
         var ivMore: ImageView = itemView.findViewById(R.id.iv_more)
         var tvTitle: TextView = itemView.findViewById(R.id.tv_title)
+        var ivAd2: ImageView = itemView.findViewById(R.id.iv_adsImage2)
+        var ivMore2: ImageView = itemView.findViewById(R.id.iv_more2)
+        var tvTitle2: TextView = itemView.findViewById(R.id.tv_title2)
 
         init {
             itemView.setOnClickListener(this)
@@ -180,6 +183,9 @@ class MainAdapter(internal var mContext: Context, internal var layoutType: Int) 
 
         override fun onClick(view: View) {
             when (view.id) {
+                ivMore2.id -> {
+                    // do something
+                }
                 ivMore.id -> showPopUpMenu()
             }
         }

@@ -36,6 +36,8 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         , BottomNavigationView.OnNavigationItemReselectedListener, AppBarLayout.OnOffsetChangedListener, View.OnFocusChangeListener {
 
 
+    var c:Int = 0
+
     override fun onFocusChange(p0: View?, p1: Boolean) {
         if (p1) {
             iv_menu.setImageResource(R.drawable.ic_right_arrow)
@@ -53,30 +55,26 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         Log.e("offset", "$verticalOffset")
         if (Math.abs(verticalOffset) == appBarLayout?.totalScrollRange) {
             // fully collapsed
-            changeColorAnimation(true)
         } else if (verticalOffset == 0) {
             // expanded
             /*int color = Color.TRANSPARENT;
             Drawable background = view.getBackground();
             if (background instanceof ColorDrawable)
                 color = ((ColorDrawable) background).getColor();*/
-            var c = Color.TRANSPARENT
-            val d = ll_toolContainer.background
-            if (d is ColorDrawable) {
-                c = d.color
-            }
-            if (c != ContextCompat.getColor(this, R.color.c1)) {
-                changeColorAnimation(false)
-            }
         } else {
+            val d = ll_toolContainer.background
+            val a = (d as ColorDrawable).color // current background color of view
+            Log.e("color", "$a , $c , $flagAnimationEnd")
+            if (a == ContextCompat.getColor(this, R.color.c1) && flagAnimationEnd) {
+                c = a
+                changeColorAnimation(true)
+            }
         }
     }
 
     private var flagAnimationEnd: Boolean = true
 
     private fun changeColorAnimation(toGreen: Boolean) {
-
-
         flagAnimationEnd = false
         val colorFrom: Int
         val colorTo: Int
@@ -89,11 +87,27 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         }
 
         val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo)
-        colorAnimation.duration = 400
+        colorAnimation.duration = 250
         colorAnimation.addUpdateListener({ valueAnimator: ValueAnimator? ->
             ll_toolContainer.setBackgroundColor(valueAnimator?.animatedValue as Int)
         })
+        colorAnimation.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationEnd(p0: Animator?) {
+                c = colorTo
+                flagAnimationEnd = true
+            }
 
+            override fun onAnimationCancel(p0: Animator?) {
+            }
+
+            override fun onAnimationStart(p0: Animator?) {
+
+            }
+
+            override fun onAnimationRepeat(p0: Animator?) {
+            }
+
+        })
         colorAnimation.start()
 
     }
@@ -117,7 +131,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         }
     }
 
-    private fun scrollToTop(){
+    private fun scrollToTop() {
         rv_main.smoothScrollToPosition(0)
     }
 
@@ -264,7 +278,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
                 iv_bigLayoutManager.setImageResource(R.drawable.ic_big)
                 iv_mediumLayoutManager.setImageResource(R.drawable.ic_medium)
                 iv_smallLayoutManager.setImageResource(R.drawable.ic_small_selected)
-                a = GridLayoutManager(this@DActivity, 2)
+                a = LinearLayoutManager(this@DActivity)
                 mMainAdapter = MainAdapter(this@DActivity, 2)
             }
         }
@@ -328,6 +342,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_d)
+        c = ContextCompat.getColor(this, R.color.c1)
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_layout)
         mBottomSheetBehavior.setBottomSheetCallback(setCallback())
         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -349,6 +364,11 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+                val i = ll.findFirstCompletelyVisibleItemPosition()
+                if (i == 0) {
+                    if (c == ContextCompat.getColor(this@DActivity, R.color.colorPrimary))
+                        changeColorAnimation(false)
+                }
                 if (ll.findLastVisibleItemPosition() > 5) {
                     fab_up.visibility = View.VISIBLE
                 } else {
