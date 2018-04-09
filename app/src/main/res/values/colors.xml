@@ -16,4 +16,7 @@
     <color name="c4">#bcbdbf</color>
     <color name="imageBackColor">#80cbc4</color>
     <color name="green0">#e0f2f1</color>
+
+    <color name="filterNavColorSelected">#318c1d</color>
+    <color name="filterNavColorNotSelected">#a5a7a4</color>
 </resources>

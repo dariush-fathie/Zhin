@@ -30,6 +30,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_d.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.content_layout.*
+import kotlinx.android.synthetic.main.filter.view.*
 
 
 class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener
@@ -229,6 +230,12 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
     }
 
     private fun openFilterDialog() {
+        var filterNavAdapter: FilterNavAdapter
+        val a: RecyclerView.LayoutManager
+        a = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
+        filterNavAdapter = FilterNavAdapter(this@DActivity)
+
+
         val filter = layoutInflater.inflate(R.layout.filter, null)
         val mBuilder = AlertDialog.Builder(this@DActivity)
         mBuilder.setView(filter)
@@ -241,10 +248,12 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         mBuilder.setNeutralButton("بستن") { dialogInterface, i ->
             dialogInterface.cancel()
         }
-        mBuilder.setTitle("انتخاب دسته بندی ")
         val v = layoutInflater.inflate(R.layout.title_cutom, null)
         v.findViewById<TextView>(R.id.tv_title_custom).text = "انتخاب دسته بندی "
         mBuilder.setCustomTitle(v)
+
+        filter.rv_filter_nav.layoutManager=a
+        filter.rv_filter_nav.adapter=filterNavAdapter
         mBuilder.show()
     }
 

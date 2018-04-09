@@ -9,6 +9,19 @@
     app:behavior_peekHeight="56dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="3dp"
+        android:orientation="horizontal"
+        android:id="@+id/rv_filter_nav"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layoutDirection="rtl">
+
+    </android.support.v7.widget.RecyclerView>
+
+<com.pchmn.materialchips.views.ScrollViewMaxHeight
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,10 +39,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="رستوران"
+            app:mcv_chipText="داخلی"
             app:mcv_closeColor="#fff"
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_textColor="#fff" />
 
         <com.robertlevonyan.views.chip.Chip
@@ -37,10 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="استخر"
+            app:mcv_chipText="قلب"
             app:mcv_closeColor="#fff"
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_textColor="#fff" />
 
         <com.robertlevonyan.views.chip.Chip
@@ -48,11 +61,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="هتل"
+            app:mcv_chipText="ریه"
             app:mcv_closeColor="#fff"
 
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_textColor="#fff" />
 
         <com.robertlevonyan.views.chip.Chip
@@ -60,11 +73,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="پلیس +10 "
+            app:mcv_chipText="چشم"
             app:mcv_closeColor="#fff"
 
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_textColor="#fff" />
 
         <com.robertlevonyan.views.chip.Chip
@@ -72,119 +85,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="سوپرمارکت"
+            app:mcv_chipText="گوش"
             app:mcv_closeColor="#fff"
 
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="مسجد"
-            app:mcv_closeColor="#fff"
-
             app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="شهربازی"
-            app:mcv_closeColor="#fff"
-
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="کافه"
-            app:mcv_closeColor="#fff"
-
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="کتابفروشی"
-            app:mcv_closeColor="#fff"
-
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="لوازم خانگی "
-            app:mcv_closeColor="#fff"
-
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="لپ تاپ"
-            app:mcv_closeColor="#fff"
-
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="سینما"
-            app:mcv_closeColor="#fff"
-
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="نانوایی "
-            app:mcv_closeColor="#fff"
-
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
-            app:mcv_textColor="#fff" />
-
-        <com.robertlevonyan.views.chip.Chip
-            android:id="@+id/chip14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="تعمیرگاه"
-            app:mcv_closeColor="#fff"
-
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
-            app:mcv_selectable="true"
             app:mcv_textColor="#fff" />
 
         <com.robertlevonyan.views.chip.Chip
@@ -192,11 +97,118 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="فروشگاه قطعات کامپیوتری"
+            app:mcv_chipText="روانپزشکی و روانشناسی"
             app:mcv_closeColor="#fff"
 
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="گوارش"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="حلق و بینی"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="مغز و اعصاب"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="عمومی"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="مجاری تنفسی"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="عفونی"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="بیهوشی"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="کلیه و مجاری ادرار"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
+            app:mcv_textColor="#fff" />
+
+        <com.robertlevonyan.views.chip.Chip
+            android:id="@+id/chip14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:mcv_backgroundColor="@color/title"
+            app:mcv_chipText="آسم و آلرژی"
+            app:mcv_closeColor="#fff"
+
+            app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_textColor="#fff" />
 
         <com.robertlevonyan.views.chip.Chip
@@ -204,11 +216,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="موبایل"
+            app:mcv_chipText="پوست مو و زیبایی"
             app:mcv_closeColor="#fff"
 
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_textColor="#fff" />
 
         <com.robertlevonyan.views.chip.Chip
@@ -216,10 +228,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:mcv_backgroundColor="@color/title"
-            app:mcv_chipText="کتابخانه"
+            app:mcv_chipText="ماما"
             app:mcv_closeColor="#fff"
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_textColor="#fff" />
 
         <com.robertlevonyan.views.chip.Chip
@@ -229,10 +241,11 @@
             app:mcv_backgroundColor="@color/title"
             app:mcv_chipText="سایر"
             app:mcv_closeColor="#fff"
-            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_selectable="true"
+            app:mcv_selectedBackgroundColor="@color/imageBackColor"
             app:mcv_textColor="#fff" />
 
     </com.google.android.flexbox.FlexboxLayout>
+</com.pchmn.materialchips.views.ScrollViewMaxHeight>
 
 </LinearLayout>

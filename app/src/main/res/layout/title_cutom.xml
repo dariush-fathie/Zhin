@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:text="انتخاب دسته بندی :"
     android:textSize="20sp"
-    android:padding="20dp"
+    android:padding="15dp"
     android:id="@+id/tv_title_custom"
     android:gravity="start"
     android:textColor="@color/title"/>
