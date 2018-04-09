@@ -37,7 +37,7 @@
         android:layout_alignBottom="@id/mapView"
         android:id="@+id/rv_bottomList"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:background="@color/transparent"
         android:paddingBottom="10dp"
         android:paddingTop="20dp" />

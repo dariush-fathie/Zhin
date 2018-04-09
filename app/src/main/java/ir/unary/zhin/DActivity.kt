@@ -47,11 +47,16 @@ class DActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCallback,
         mMap = p0!!
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val sydney = LatLng(35.311793, 46.995468)
+        mMap.addMarker(MarkerOptions().position(sydney).title("we are here !"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney , 16f))
+        mMap.addMarker(MarkerOptions().position(LatLng(35.309845,46.997552)).title("دکتر رحیمی"))
+        mMap.addMarker(MarkerOptions().position(LatLng(35.308698,46.997982)).title("دکتر ساعد"))
+        mMap.addMarker(MarkerOptions().position(LatLng(35.311228,46.992086)).title("دکتر شیخ الاسلامی"))
+        mMap.addMarker(MarkerOptions().position(LatLng(35.309492,46.997633)).title("دکتر بیان شریفی"))
+        mMap.addMarker(MarkerOptions().position(LatLng(35.310933,46.998192)).title("آزمایشگاه راژه"))
+        mMap.addMarker(MarkerOptions().position(LatLng(35.311951,46.9955172)).title("داروخانه دکتر فتحی"))
     }
-
 
     var c: Int = 0
 
