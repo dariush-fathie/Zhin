@@ -36,7 +36,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         , BottomNavigationView.OnNavigationItemReselectedListener, AppBarLayout.OnOffsetChangedListener, View.OnFocusChangeListener {
 
 
-    var c:Int = 0
+    var c: Int = 0
 
     override fun onFocusChange(p0: View?, p1: Boolean) {
         if (p1) {
@@ -364,7 +364,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val i = ll.findFirstCompletelyVisibleItemPosition()
+                val i = (recyclerView?.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
                 if (i == 0) {
                     if (c == ContextCompat.getColor(this@DActivity, R.color.colorPrimary))
                         changeColorAnimation(false)
