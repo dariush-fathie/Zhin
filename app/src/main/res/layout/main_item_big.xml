@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.2">
+            android:layout_weight="2.5">
 
             <ImageView
                 android:id="@+id/iv_adsImage"
@@ -123,7 +123,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.7"
+            android:layout_weight="0.5"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingEnd="10dp"
