@@ -25,7 +25,6 @@ public class FilterNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void fillBuffer() {
-        buffer.clear();
 
         buffer.add("مطب");
         buffer.add("آزمایشگاه");
@@ -34,17 +33,34 @@ public class FilterNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         buffer.add("کمپ ترک اعتیاد");
         buffer.add("سایر");
 
-
-    }
-
-    private void cheched_mth(int k) {
-        chechedArr.clear();
-        for (int i = 0; i <buffer.size() ; i++) {
+        for (int i = 0; i < buffer.size(); i++) {
             chechedArr.add(false);
         }
+        chechedArr.set(0,true);
 
-        chechedArr.set(k,true);
+
     }
+
+
+    private void cheched_mth(int k) {
+
+
+        if (!chechedArr.get(k)) {
+            chechedArr.set(k, true);
+
+            notifyItemChanged(k);
+
+            for (int i = 0; i < chechedArr.size(); i++) {
+                if (i != k && chechedArr.get(i)) {
+                    chechedArr.set(i, false);
+                    notifyItemChanged(i);
+                }
+            }
+
+        }
+
+    }
+
 
     @NonNull
     @Override
@@ -93,7 +109,6 @@ public class FilterNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View view) {
             cheched_mth(getAdapterPosition());
-            notifyItemChanged(0,buffer.size());
         }
     }
 }
