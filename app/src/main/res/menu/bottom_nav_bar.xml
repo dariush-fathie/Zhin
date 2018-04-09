@@ -5,15 +5,11 @@
         android:icon="@drawable/ic_nearby"
         android:title="نزدیک" />
     <item
-        android:id="@+id/menu_popular"
-        android:icon="@drawable/ic_start"
-        android:title="پربازدید" />
-    <item
         android:id="@+id/menu_new"
         android:icon="@drawable/ic_new"
-        android:title="جدید" />
+        android:title="نقشه" />
     <item
         android:id="@+id/menu_fav"
         android:icon="@drawable/ic_new"
-        android:title="علاقمندی" />
+        android:title="نشان شده" />
 </menu>
