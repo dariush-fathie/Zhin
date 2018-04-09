@@ -7,39 +7,56 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.BottomNavigationView
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.NavigationView
+import android.support.design.widget.*
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewTreeObserver
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_d.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.content_layout.*
 import kotlinx.android.synthetic.main.filter.view.*
 
 
-class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener
+class DActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCallback, BottomNavigationView.OnNavigationItemSelectedListener
         , BottomNavigationView.OnNavigationItemReselectedListener, AppBarLayout.OnOffsetChangedListener, View.OnFocusChangeListener {
+
+
+    private lateinit var mMap: GoogleMap
+    override fun onMapReady(p0: GoogleMap?) {
+        mMap = p0!!
+
+        // Add a marker in Sydney and move the camera
+        val sydney = LatLng(-34.0, 151.0)
+        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    }
 
 
     var c: Int = 0
 
     override fun onFocusChange(p0: View?, p1: Boolean) {
+        closeBottomSheet()
         if (p1) {
             iv_menu.setImageResource(R.drawable.ic_right_arrow)
             iv_search.setImageResource(R.drawable.ic_delete_black)
@@ -50,7 +67,6 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
             et_search.hint = "ژین"
         }
     }
-
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         Log.e("offset", "$verticalOffset")
@@ -137,6 +153,7 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
     }
 
     private fun onMenuClick() {
+        closeBottomSheet()
         if (et_search.hasFocus()) {
             et_search.clearFocus()
             hideKeyboard()
@@ -252,8 +269,8 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         v.findViewById<TextView>(R.id.tv_title_custom).text = "انتخاب دسته بندی "
         mBuilder.setCustomTitle(v)
 
-        filter.rv_filter_nav.layoutManager=a
-        filter.rv_filter_nav.adapter=filterNavAdapter
+        filter.rv_filter_nav.layoutManager = a
+        filter.rv_filter_nav.adapter = filterNavAdapter
         mBuilder.show()
     }
 
@@ -295,13 +312,14 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         rv_main.adapter = mMainAdapter
     }
 
-    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<RelativeLayout>
     private lateinit var mBottomSheetCallback: BottomSheetBehavior.BottomSheetCallback
     private lateinit var mBottomSheetAdapter: BottomSheetAdapter
     private lateinit var mMainAdapter: MainAdapter
 
 
     private fun onSearchClick() {
+        closeBottomSheet()
         if (et_search.hasFocus()) {
             et_search.text.clear()
         } else {
@@ -309,6 +327,12 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
             openKeyboard()
         }
 
+    }
+
+    fun closeBottomSheet() {
+        if (mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
     }
 
     private fun onSearchActionClick() {
@@ -351,6 +375,12 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_d)
+
+        val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+
         c = ContextCompat.getColor(this, R.color.c1)
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_layout)
         mBottomSheetBehavior.setBottomSheetCallback(setCallback())
@@ -430,6 +460,24 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
                     true
                 })
 
+
+        main_content.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                main_content.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                layoutheight = main_content.height
+                Log.e("h", "$layoutheight")
+                setBottomSetHeight()
+            }
+        })
+
+    }
+
+    var layoutheight = 0
+
+    fun setBottomSetHeight() {
+        val lp: RelativeLayout.LayoutParams = mapView.layoutParams as RelativeLayout.LayoutParams
+        lp.height = layoutheight - dpTpPx(125)
+        mapView.layoutParams = lp
     }
 
 
@@ -441,12 +489,6 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
                 rv_bottomList.adapter = mBottomSheetAdapter
                 return true
             }
-            R.id.menu_popular -> {
-                mBottomSheetAdapter = BottomSheetAdapter(this@DActivity, 1)
-                rv_bottomList.adapter = mBottomSheetAdapter
-                return true
-            }
-
             R.id.menu_new -> {
                 mBottomSheetAdapter = BottomSheetAdapter(this@DActivity, 2)
                 rv_bottomList.adapter = mBottomSheetAdapter
@@ -472,10 +514,6 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
         when (bottomNavigation.selectedItemId) {
             R.id.menu_nearby -> {
                 mBottomSheetAdapter = BottomSheetAdapter(this@DActivity, 0)
-                rv_bottomList.adapter = mBottomSheetAdapter
-            }
-            R.id.menu_popular -> {
-                mBottomSheetAdapter = BottomSheetAdapter(this@DActivity, 1)
                 rv_bottomList.adapter = mBottomSheetAdapter
             }
 
@@ -505,18 +543,39 @@ class DActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationVie
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Log.e("onSlide", "offset:" + slideOffset)
+                Log.e("a", "$slideOffset")
+                appBarLayout.setExpanded(true, false)
             }
         }
         return mBottomSheetCallback
     }
 
 
+    fun dpTpPx(dp: Int): Int {
+        val metrics = resources.displayMetrics
+        return Math.round(dp * (metrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+    }
+
+    fun pxToDp(px: Int): Int {
+        val displayMetrics = getResources().getDisplayMetrics()
+        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+    }
+
     private fun toggleBottomSheet() {
         if (mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+
             //mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
         } else {
             mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+    override fun onBackPressed() {
+        if (mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED){
+            closeBottomSheet()
+        } else {
+            super.onBackPressed()
         }
     }
 
