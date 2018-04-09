@@ -21,7 +21,7 @@ class BottomSheetAdapter(internal var mContext: Context, internal var tabPositio
     }
 
     override fun getItemCount(): Int {
-        return 100
+        return 20
     }
 
 
@@ -33,9 +33,8 @@ class BottomSheetAdapter(internal var mContext: Context, internal var tabPositio
             var pre = ""
             when (tabPosition) {
                 0 -> pre = "نزدیک ترین "
-                1 -> pre = "پربازدید "
-                2 -> pre = "جدیدترین "
-                3 -> pre = "علاقمندی"
+                2-> pre = "نقشه "
+                3 -> pre = "نشان شده ها"
             }
             tv.text = "$pre#$adapterPosition"
             itemView.setOnClickListener(this)

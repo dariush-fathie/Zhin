@@ -117,7 +117,7 @@
                             android:maxLines="1"
                             android:paddingEnd="15dp"
                             android:paddingStart="5dp"
-                            android:text="تبریز"
+                            android:text="سنندج"
                             android:textColor="@color/subTitle"
                             android:textSize="15sp" />
 
@@ -132,7 +132,7 @@
                             android:maxLines="1"
                             android:paddingEnd="15dp"
                             android:paddingStart="5dp"
-                            android:text="آذربایجان غربی"
+                            android:text="کردستان"
                             android:textColor="@color/subTitle"
                             android:textSize="15sp" />
 
